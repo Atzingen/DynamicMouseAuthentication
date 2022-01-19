@@ -287,7 +287,7 @@ def create_single_user_data(users_dict,user_key):
     X = numpy.concatenate((X_true,X_false),axis=0)
     return X,y
 
-def train_standard_xgb(X_train,y_train,X_val,y_val): #Parameters searched
+def train_standard_xgb(X_train,y_train,X_val,y_val,seed=0): #Parameters optimized
     classifier = xgb.XGBClassifier(
                                 tree_method='exact',
                                 # gpu_id=0,
@@ -530,7 +530,7 @@ def number_of_samples_analysis(untreated_raw_dict):
     analysisbar.close()
     return max_time_results, min_action_lenght_results
 
-def analysis_plot(f,results_list,labels,title=False,xlabel=False,ylabel=False,xlim=False,ylim=False,tight=False):
+def analysis_plot(fig,results_list,labels,title=False,xlabel=False,ylabel=False,xlim=False,ylim=False,tight=False):
     ax = fig.add_axes([0,0,1,1])
     ax.set_axisbelow(True)
     ax.scatter(labels,results_list,s=65,marker='D',color='k')
@@ -552,4 +552,4 @@ def analysis_plot(f,results_list,labels,title=False,xlabel=False,ylabel=False,xl
         ax.set_ylabel(ylabel,labelpad=15)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    return f, ax
+    return fig, ax
